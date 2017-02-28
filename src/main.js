@@ -19,9 +19,15 @@ require('./init.js').then( sessions => {
       }
     ).then( msgFromCleverbot => {
       console.log('Steam:',msgFromSteam, 'Cleverbot:', msgFromCleverbot)
+      ctrl.sendMessageToSteam(
+        {
+          steamFriends: steamSession.steamFriends,
+          senderId: chatRoomId,
+          message: msgFromCleverbot
+        }
+      )
     })
 
-    //let receivedMessage = ctrl.loadMessageFromSteam()
   })
 
 })
