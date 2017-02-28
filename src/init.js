@@ -12,9 +12,7 @@ console.log('Initiating')
 
 
 let cleverbotInstance = ctrl.loginToCleverbot({username: cfg.botUsername})
-//Placeholder for steam instance. Commented out, because loginToSteam is not working
-let steamInstance = new Promise((res, rej) => {res(1)})
-//let steamInstance = ctrl.loginToSteam(/*args*/)
+let steamInstance = ctrl.loginToSteam()
 
 //Logging to cleverbot
 cleverbotInstance.catch( err => {
@@ -26,7 +24,6 @@ cleverbotInstance.then( cleverbotSession => {
 })
 
 ////////////////Logging to steam//////////////
-/* commented out, because loginToSteam is not working
 steamInstance.catch( err => {
   console.log('[steam error] An error occured during creating a session', err)
   console.log('[steam error] debug msg: credentials: ',
@@ -37,8 +34,6 @@ steamInstance.catch( err => {
 steamInstance.then( cleverbotSession => {
   console.log('Logged to steam')
 })
-*/
-//////////////////////////////////////////////
 
 
 
