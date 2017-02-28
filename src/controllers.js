@@ -62,7 +62,10 @@ module.exports = {
     })
   },
   logoutFromCleverbot: () => {},
-  sendMessageToSteam: () => {},
+  sendMessageToSteam: ({steamFriends, senderId, message}) => {
+    
+    steamFriends.sendMessage(senderId,message,Steam.EChatEntryType.ChatMsg)
+  },
   loadMessageFromSteam: (msg) => { return msg},
   loadMessageFromCleverbot: (msg) => { return msg},
   sendMessageToCleverbot: (ctrlObj) => {
