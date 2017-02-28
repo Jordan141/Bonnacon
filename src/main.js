@@ -3,15 +3,17 @@
 const ctrl = require('./controllers.js')
 const cfg = require('./config.json')
 const credentials = require('./credentials.json')
-
+const packageFile = require('./package.json')
 
 //Init the program
 require('./init.js').then( sessions => {
   let [cleverbotSession, steamSession] = sessions
   console.log('Cleverbot and steam sessions synchronised')
 //  DRAFT FOR LISTENING FOR STEAM MESSAGES
+
   steamSession.steamFriends.on('message', (chatRoomId, message) => {
     let msgFromSteam = ctrl.loadMessageFromSteam(message)
+    console.log('Message incomming from', chatRoomId,':', message)
     let cleverbotListener = ctrl.sendMessageToCleverbot(
       {
         session: cleverbotSession,
@@ -26,7 +28,7 @@ require('./init.js').then( sessions => {
           message: msgFromCleverbot
         }
       )
-    }).catch(err => err)
+    }).catch(err => console.log(err))
 
   })
 

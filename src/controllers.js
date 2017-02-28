@@ -51,6 +51,7 @@ module.exports = {
     let {username} = ctrlObj
     let bot = new cleverbot(credentials.cleverBotApiUser, credentials.cleverBotApiKey)
     return new Promise( (resolve, reject) => {
+      bot.setNick(username)
       bot.create((err, session) => {
         if (err) return reject(err)
         return resolve(bot)
@@ -61,8 +62,7 @@ module.exports = {
 
   //////////////////////STEAM MESSAGING//////////////////////
   sendMessageToSteam: ({steamFriends, senderId, message}) => {
-
-    steamFriends.sendMessage(senderId,message,Steam.EChatEntryType.ChatMsg)
+    steamFriends.sendMessage(senderId, message, Steam.EChatEntryType.ChatMsg)
   },
   loadMessageFromSteam: msg => {
     if (msg !== '') return msg //Steam sends empty message as "Is typing" info
@@ -73,11 +73,10 @@ module.exports = {
   loadMessageFromCleverbot: msg => msg,
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
-
     return new Promise ( (resolve, reject) => {
       if (message !== false) {
         session.ask(message, (err, response) => {
-          if (err) return reject(err)
+          if (err) return reject(response)
           return resolve(response)
         })
       } else {
