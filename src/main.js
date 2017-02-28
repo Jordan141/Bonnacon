@@ -26,7 +26,7 @@ require('./init.js').then( sessions => {
           message: msgFromCleverbot
         }
       )
-    })
+    }).catch(err => err)
 
   })
 

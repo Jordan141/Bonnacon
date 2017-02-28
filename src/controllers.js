@@ -64,17 +64,25 @@ module.exports = {
 
     steamFriends.sendMessage(senderId,message,Steam.EChatEntryType.ChatMsg)
   },
-  loadMessageFromSteam: msg => msg,
+  loadMessageFromSteam: msg => {
+    if (msg !== '') return msg //Steam sends empty message as "Is typing" info
+    return false
+  },
 
   //////////////////////CLEVERBOT MESSAGING//////////////////////
   loadMessageFromCleverbot: msg => msg,
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
+
     return new Promise ( (resolve, reject) => {
-      session.ask(message, (err, response) => {
-        if (err) return reject(err)
-        return resolve(response)
-      })
+      if (message !== false) {
+        session.ask(message, (err, response) => {
+          if (err) return reject(err)
+          return resolve(response)
+        })
+      } else {
+        return reject('Empty message')
+      }
     })
 
   }
