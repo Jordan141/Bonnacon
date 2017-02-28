@@ -1,5 +1,9 @@
 const cleverbot = require("cleverbot.io")
 const credentials = require('./credentials.json')
+const steam = require('steam')
+let steamClient = new Steam.SteamClient();
+let steamUser = new Steam.SteamUser(steamClient);
+let steamFriends = new Steam.SteamFriends(steamClient);
 /*
 {
 "cleverBotApiUser": "",
@@ -9,7 +13,22 @@ const credentials = require('./credentials.json')
 }
 */
 module.exports = {
-  loginToSteam: () => {},
+  loginToSteam: (botName) => {
+    steamClient.connect();
+    steamClient.on('connected', () => {
+      steamUser.logOn({
+        account_name: credentials.steamUsername,
+        password: credentials.steamPassword
+      })
+    })
+    steamClient.on('logOnResponse', (logonResp) => {
+        if(logonResp.eresult == Steam.EResult.OK){
+          console.log('Logged In!')
+          steamFriends.setPersonaState(Steam.EPersonaState.Online)
+          steamFriends.setPersonaName(botName || 'Best Bot Ever')
+        }
+    });
+  },
   logoutFromSteam: () => {},
 
   loginToCleverbot: (ctrlObj) => {
