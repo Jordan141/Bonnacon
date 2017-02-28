@@ -3,6 +3,7 @@ require('./init.js') //Init the program
 const ctrl = require('./controllers.js')
 const cfg = require('./config.json')
 
+
 //Example usage
 /*
 let cleverbotSession = ctrl.loginToCleverbot({
