@@ -10,12 +10,7 @@ const credentials = require('./credentials.json')
 }
 */
 module.exports = {
-  loginToSteam: (steamUser) => {
-    steamUser.logOn({
-   account_name: credentials.steamUsername,
-   password: credentials.steamPassword
- });
-  },
+  loginToSteam: () => {},
   logoutFromSteam: () => {},
 
   loginToCleverbot: (ctrlObj) => {
