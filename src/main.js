@@ -2,6 +2,7 @@
 require('./init.js') //Init the program
 const ctrl = require('./controllers.js')
 const cfg = require('./config.json')
+var Steam = require('steam');
 
 
 //Example usage
@@ -21,3 +22,4 @@ cleverbotSession.then( session => {
   console.log(response)
 })
 */
+ctrl.loginToSteam();

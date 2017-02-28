@@ -1,6 +1,6 @@
 const cleverbot = require("cleverbot.io")
 const credentials = require('./credentials.json')
-
+const Steam = require('steam');
 /*
 {
 "cleverBotApiUser": "",
@@ -10,7 +10,28 @@ const credentials = require('./credentials.json')
 }
 */
 module.exports = {
-  loginToSteam: () => {},
+  loginToSteam: () => {
+    var steamClient = new Steam.SteamClient();
+    var steamUser = new Steam.SteamUser(steamClient);
+    var steamFriends = new Steam.SteamFriends(steamClient);
+
+    steamClient.connect();
+    steamClient.on('connected', function() {
+      steamUser.logOn({
+        account_name: credentials.steamUsername,
+        password: credentials.steamPassword
+  });
+    });
+
+    steamClient.on('logOnResponse', function(logonResp) {
+      if (logonResp.eresult == Steam.EResult.OK) {
+        console.log('Logged in!');
+        steamFriends.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
+        steamFriends.setPersonaName('King Russian'); // to change its nickname
+        //steamFriends.joinChat('103582791431621417'); // the group's SteamID as a string
+      }
+    });
+  },
   logoutFromSteam: () => {},
 
   loginToCleverbot: (ctrlObj) => {
