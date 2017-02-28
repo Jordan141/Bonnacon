@@ -11,7 +11,7 @@ License: ${packageFile.license}
 console.log('Initiating')
 
 let cleverbotInstance = ctrl.loginToCleverbot({username: cfg.botUsername})
-let steamInstance = ctrl.loginToSteam()
+let steamInstance = ctrl.loginToSteam({username: cfg.botUsername})
 
 
 //Logging to cleverbot
