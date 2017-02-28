@@ -1,6 +1,10 @@
 const cleverbot = require("cleverbot.io")
 const credentials = require('./credentials.json')
 const Steam = require('steam');
+var steamClient = new Steam.SteamClient();
+var steamUser = new Steam.SteamUser(steamClient);
+var steamFriends = new Steam.SteamFriends(steamClient);
+
 /*
 {
 "cleverBotApiUser": "",
@@ -11,10 +15,6 @@ const Steam = require('steam');
 */
 module.exports = {
   loginToSteam: () => {
-    var steamClient = new Steam.SteamClient();
-    var steamUser = new Steam.SteamUser(steamClient);
-    var steamFriends = new Steam.SteamFriends(steamClient);
-
     steamClient.connect();
     steamClient.on('connected', function() {
       steamUser.logOn({
@@ -31,6 +31,7 @@ module.exports = {
         //steamFriends.joinChat('103582791431621417'); // the group's SteamID as a string
       }
     });
+    return new Promise((resolve,reject) => {resolve('Daddy cool')})
   },
   logoutFromSteam: () => {},
 
