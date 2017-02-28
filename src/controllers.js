@@ -29,6 +29,15 @@ module.exports = {
         console.log('Logged in!');
         steamFriends.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
         steamFriends.setPersonaName('King Russian'); // to change its nickname
+
+        steamFriends.on('message', function(source, message, type, chatter) {
+        // respond to both chat room and private messages
+        console.log('Received message: ' + message);
+        if (message == 'Cyka') {
+          steamFriends.sendMessage(source, 'Blyat', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
+        }
+});
+
         //steamFriends.joinChat('103582791431621417'); // the group's SteamID as a string
       }
     });
