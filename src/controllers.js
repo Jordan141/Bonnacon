@@ -11,6 +11,7 @@ const Steam = require('steam');
 }
 */
 module.exports = {
+  //Session management
   loginToSteam: () => {
     return new Promise((resolve, reject) => {
       var steamClient = new Steam.SteamClient();
@@ -45,7 +46,6 @@ module.exports = {
     })
   },
   logoutFromSteam: () => {},
-
   loginToCleverbot: (ctrlObj) => {
     //loginObj {apiUser, apiKey, username}
     let {username} = ctrlObj
@@ -62,12 +62,16 @@ module.exports = {
     })
   },
   logoutFromCleverbot: () => {},
+
+  //Steam messaging
   sendMessageToSteam: ({steamFriends, senderId, message}) => {
-    
+
     steamFriends.sendMessage(senderId,message,Steam.EChatEntryType.ChatMsg)
   },
-  loadMessageFromSteam: (msg) => { return msg},
-  loadMessageFromCleverbot: (msg) => { return msg},
+  loadMessageFromSteam: msg => msg,
+
+  //Cleverbot messaging
+  loadMessageFromCleverbot: msg => msg,
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
     console.log(session)
