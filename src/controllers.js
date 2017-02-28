@@ -11,7 +11,7 @@ const Steam = require('steam');
 }
 */
 module.exports = {
-  //Session management
+  //////////////////////SESSION MANAGEMENT//////////////////////////
   loginToSteam: () => {
     return new Promise((resolve, reject) => {
       var steamClient = new Steam.SteamClient();
@@ -28,13 +28,13 @@ module.exports = {
 
       steamClient.on('logOnResponse', function(logonResp) {
         if (logonResp.eresult == Steam.EResult.OK) {
-          console.log('Logged in!');
+          //console.log('Logged in!');
           steamFriends.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
           steamFriends.setPersonaName('King Russian'); // to change its nickname
 
           steamFriends.on('message', function(source, message, type, chatter) {
             // respond to both chat room and private messages
-            console.log('Received message: ' + message);
+            //console.log('Received message: ' + message);
             if (message == 'Cyka') {
               steamFriends.sendMessage(source, 'Blyat', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
             }
@@ -49,32 +49,27 @@ module.exports = {
   loginToCleverbot: (ctrlObj) => {
     //loginObj {apiUser, apiKey, username}
     let {username} = ctrlObj
-    let bot = new cleverbot(credentials.cleverBotApiUser,credentials.cleverBotApiKey)
+    let bot = new cleverbot(credentials.cleverBotApiUser, credentials.cleverBotApiKey)
     return new Promise( (resolve, reject) => {
       bot.create((err, session) => {
-        if (err) {
-          console.log('[cleverbot error] An error occured during creating session', err)
-          console.log('[cleverbot error] debug msg: username: ', username)
-          return reject(err)
-        }
+        if (err) return reject(err)
         return resolve(bot)
       })
     })
   },
   logoutFromCleverbot: () => {},
 
-  //Steam messaging
+  //////////////////////STEAM MESSAGING//////////////////////
   sendMessageToSteam: ({steamFriends, senderId, message}) => {
 
     steamFriends.sendMessage(senderId,message,Steam.EChatEntryType.ChatMsg)
   },
   loadMessageFromSteam: msg => msg,
 
-  //Cleverbot messaging
+  //////////////////////CLEVERBOT MESSAGING//////////////////////
   loadMessageFromCleverbot: msg => msg,
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
-    console.log(session)
     return new Promise ( (resolve, reject) => {
       session.ask(message, (err, response) => {
         if (err) return reject(err)

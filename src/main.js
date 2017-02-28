@@ -18,7 +18,7 @@ require('./init.js').then( sessions => {
         message: msgFromSteam
       }
     ).then( msgFromCleverbot => {
-      console.log('Steam:',msgFromSteam, 'Cleverbot:', msgFromCleverbot)
+      console.log(`${msgFromSteam} ===> ${msgFromCleverbot}\n`)
       ctrl.sendMessageToSteam(
         {
           steamFriends: steamSession.steamFriends,
