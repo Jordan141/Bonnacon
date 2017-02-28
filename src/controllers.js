@@ -9,5 +9,5 @@ module.export = {
   loadMessageFromSteam: () => {},
 
   sendMessageToCleverbot: () => {},
-  loadMessageFromCleverbot () => {}
+  loadMessageFromCleverbot: () => {}
 }
