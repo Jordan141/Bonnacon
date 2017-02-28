@@ -1,9 +1,6 @@
 const cleverbot = require("cleverbot.io")
 const credentials = require('./credentials.json')
 const Steam = require('steam');
-var steamClient = new Steam.SteamClient();
-var steamUser = new Steam.SteamUser(steamClient);
-var steamFriends = new Steam.SteamFriends(steamClient);
 
 /*
 {
@@ -15,6 +12,10 @@ var steamFriends = new Steam.SteamFriends(steamClient);
 */
 module.exports = {
   loginToSteam: () => {
+    var steamClient = new Steam.SteamClient();
+    var steamUser = new Steam.SteamUser(steamClient);
+    var steamFriends = new Steam.SteamFriends(steamClient);
+
     steamClient.connect();
     steamClient.on('connected', function() {
       steamUser.logOn({
@@ -52,7 +53,7 @@ module.exports = {
   },
   logoutFromCleverbot: () => {},
   sendMessageToSteam: () => {},
-  loadMessageFromSteam: () => { },
+  loadMessageFromSteam: (msg) => { return msg},
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
     return new Promise ( (resolve, reject) => {
