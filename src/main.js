@@ -3,12 +3,20 @@ require('./init.js') //Init the program
 const ctrl = require('./controllers.js')
 const cfg = require('./config.json')
 
-let session = ctrl.loginToCleverbot(
-  {
-    apiUser: 'imQaCJtuhQFvtFmN',
-    apiKey: 'FpZoxNWTTEkPyPUlD2Tj6lRbpU4iLX4q',
+//Example usage
+/*
+let cleverbotSession = ctrl.loginToCleverbot({
     username: 'bya'
   },
   () => {}
 )
-console.log(JSON.stringify(session))
+cleverbotSession.then( session => {
+  return ctrl.sendMessageToCleverbot({
+      session,
+      message: 'test msg',
+    }
+  )
+}).then( response => {
+  console.log(response)
+})
+*/

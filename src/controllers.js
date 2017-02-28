@@ -12,17 +12,30 @@ module.exports = {
   loginToSteam: () => {},
   logoutFromSteam: () => {},
 
-  loginToCleverbot: ( loginObj, cb) => {
+  loginToCleverbot: (ctrlObj, cb) => {
     //loginObj {apiUser, apiKey, username}
-    let {username} = loginObj
+    let {username} = ctrlObj
     let bot = new cleverbot(credentials.cleverBotApiUser,credentials.cleverBotApiKey)
-    return bot.create(cb)
+    return new Promise( (resolve, reject) => {
+      bot.create((err, session) => {
+        if (err) return reject(err)
+        return resolve(bot)
+      })
+    })
   },
   logoutFromCleverbot: () => {},
 
   sendMessageToSteam: () => {},
   loadMessageFromSteam: () => {},
 
-  sendMessageToCleverbot: () => {},
-  loadMessageFromCleverbot: () => {}
+  sendMessageToCleverbot: (ctrlObj, cb) => {
+    let {session, message} = ctrlObj
+    return new Promise ( (resolve, reject) => {
+      session.ask(message, (err, response) => {
+        if (err) return reject(err)
+        return resolve(response)
+      })
+    })
+
+  }
 }
