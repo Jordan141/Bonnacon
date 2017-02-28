@@ -9,6 +9,14 @@ const credentials = require('./credentials.json')
 require('./init.js').then( sessions => {
   let [cleverbotSession, steamSession] = sessions
   console.log('Cleverbot and steam sessions synchronised')
+
+//  DRAFT FOR LISTENING FOR STEAM MESSAGES
+  steamSession.steamFriends.on('message', (chatRoomId, message) => {
+    let msgFromSteam = ctrl.loadMessageFromSteam(message)
+    console.log(message)
+    //let receivedMessage = ctrl.loadMessageFromSteam()
+  })
+
 })
 
 

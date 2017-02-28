@@ -12,36 +12,37 @@ const Steam = require('steam');
 */
 module.exports = {
   loginToSteam: () => {
-    var steamClient = new Steam.SteamClient();
-    var steamUser = new Steam.SteamUser(steamClient);
-    var steamFriends = new Steam.SteamFriends(steamClient);
+    return new Promise((resolve, reject) => {
+      var steamClient = new Steam.SteamClient();
+      var steamUser = new Steam.SteamUser(steamClient);
+      var steamFriends = new Steam.SteamFriends(steamClient);
 
-    steamClient.connect();
-    steamClient.on('connected', function() {
-      steamUser.logOn({
-        account_name: credentials.steamUsername,
-        password: credentials.steamPassword
-  });
-    });
+      steamClient.connect();
+      steamClient.on('connected', function() {
+        steamUser.logOn({
+          account_name: credentials.steamUsername,
+          password: credentials.steamPassword
+        });
+      });
 
-    steamClient.on('logOnResponse', function(logonResp) {
-      if (logonResp.eresult == Steam.EResult.OK) {
-        console.log('Logged in!');
-        steamFriends.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
-        steamFriends.setPersonaName('King Russian'); // to change its nickname
+      steamClient.on('logOnResponse', function(logonResp) {
+        if (logonResp.eresult == Steam.EResult.OK) {
+          console.log('Logged in!');
+          steamFriends.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
+          steamFriends.setPersonaName('King Russian'); // to change its nickname
 
-        steamFriends.on('message', function(source, message, type, chatter) {
-        // respond to both chat room and private messages
-        console.log('Received message: ' + message);
-        if (message == 'Cyka') {
-          steamFriends.sendMessage(source, 'Blyat', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
+          steamFriends.on('message', function(source, message, type, chatter) {
+            // respond to both chat room and private messages
+            console.log('Received message: ' + message);
+            if (message == 'Cyka') {
+              steamFriends.sendMessage(source, 'Blyat', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
+            }
+          });
+          resolve({steamClient, steamUser, steamFriends})
+          //steamFriends.joinChat('103582791431621417'); // the group's SteamID as a string
         }
-});
-
-        //steamFriends.joinChat('103582791431621417'); // the group's SteamID as a string
-      }
-    });
-    return new Promise((resolve,reject) => {resolve('Daddy cool')})
+      });
+    })
   },
   logoutFromSteam: () => {},
 
