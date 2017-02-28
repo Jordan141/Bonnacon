@@ -25,7 +25,7 @@ cleverbotInstance.then( cleverbotSession => {
   console.log('Logged to cleverbot')
 })
 
-//Logging to steam
+////////////////Logging to steam//////////////
 /* commented out, because loginToSteam is not working
 steamInstance.catch( err => {
   console.log('[steam error] An error occured during creating a session', err)
@@ -38,4 +38,9 @@ steamInstance.then( cleverbotSession => {
   console.log('Logged to steam')
 })
 */
+//////////////////////////////////////////////
+
+
+
+//Export a promise that resolves once all instances will be ready
 module.exports = Promise.all([cleverbotInstance, steamInstance])
