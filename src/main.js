@@ -2,9 +2,6 @@
 
 const ctrl = require('./controllers.js')
 const cfg = require('./config.json')
-<<<<<<< HEAD
-var Steam = require('steam');
-=======
 const credentials = require('./credentials.json')
 
 
@@ -13,7 +10,6 @@ require('./init.js').then( sessions => {
   let [cleverbotSession, steamSession] = sessions
   console.log('Cleverbot and steam sessions synchronised')
 })
->>>>>>> a7d0934492fee9787784608cea37dc6b0e369dc7
 
 
 
@@ -40,4 +36,3 @@ cleverbotSession.then( session => {
   console.log(response)
 })
 */
-ctrl.loginToSteam();
