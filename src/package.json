@@ -1,0 +1,26 @@
+{
+  "name": "bonnacon",
+  "version": "1.0.0",
+  "description": "A chat bot for steam",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordan141/Bonnacon.git"
+  },
+  "keywords": [
+    "bonnacon",
+    "steam",
+    "chat",
+    "bot",
+    "cleverbot"
+  ],
+  "author": "Michael Kurowski and Jordan Moss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jordan141/Bonnacon/issues"
+  },
+  "homepage": "https://github.com/Jordan141/Bonnacon#readme"
+}
