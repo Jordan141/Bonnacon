@@ -64,8 +64,10 @@ module.exports = {
   logoutFromCleverbot: () => {},
   sendMessageToSteam: () => {},
   loadMessageFromSteam: (msg) => { return msg},
+  loadMessageFromCleverbot: (msg) => { return msg},
   sendMessageToCleverbot: (ctrlObj) => {
     let {session, message} = ctrlObj
+    console.log(session)
     return new Promise ( (resolve, reject) => {
       session.ask(message, (err, response) => {
         if (err) return reject(err)
