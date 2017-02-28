@@ -1,3 +1,4 @@
 //Main loop
 require('./init.js') //Init the program
-let cfg = require('./config.json')
+const ctrl = require('./controllers.js')
+const cfg = require('./config.json')
