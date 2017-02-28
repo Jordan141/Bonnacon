@@ -18,7 +18,7 @@ let steamInstance = ctrl.loginToSteam()
 //Placeholder for steam instance. Commented out, because loginToSteam is not working
 //let steamInstance = new Promise((res, rej) => {res(1)})
 let steamInstance = ctrl.loginToSteam(/*args*/)
->>>>>>> af567a1bb481b8b342860b7b7c0f39ad80a694d8
+
 
 //Logging to cleverbot
 cleverbotInstance.catch( err => {
